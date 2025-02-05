@@ -3,7 +3,6 @@ package com.lab.epam.crm.gym.mapper;
 import com.lab.epam.crm.gym.dto.TraineeDto;
 import com.lab.epam.crm.gym.entity.Trainee;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 

@@ -2,6 +2,7 @@ package com.lab.epam.crm.gym.dto;
 
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+
 import static lombok.AccessLevel.PRIVATE;
 
 @Data

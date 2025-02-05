@@ -1,0 +1,45 @@
+2025-02-05 09:31:40.525 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Initializing InMemoryStorage from file: src/main/resources/data/dev-data.csv
+2025-02-05 09:31:40.529 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainer: Trainer(specialization=CARDIO)
+2025-02-05 09:31:40.529 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainee: Trainee(dateOfBirth=1990-01-01, address=123 Main St)
+2025-02-05 09:31:40.530 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded training: Training(id=1, traineeId=2, trainerId=1, name=Morning Cardio Session, type=CARDIO, date=2023-10-14, duration=60)
+2025-02-05 09:31:40.536 INFO [main] c.l.e.c.g.d.storage.InMemoryStorage InMemoryStorage initialized successfully
+2025-02-05 09:31:40.580 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=CARDIO)
+2025-02-05 09:31:40.580 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 1
+2025-02-05 09:31:40.580 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=STRENGTH_TRAINING)
+2025-02-05 09:31:40.580 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 2
+2025-02-05 09:40:02.701 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Initializing InMemoryStorage from file: src/main/resources/data/dev-data.csv
+2025-02-05 09:40:02.704 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainer: Trainer(specialization=CARDIO)
+2025-02-05 09:40:02.705 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainee: Trainee(dateOfBirth=1990-01-01, address=123 Main St)
+2025-02-05 09:40:02.707 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded training: Training(id=1, traineeId=2, trainerId=1, name=Morning Cardio Session, type=CARDIO, date=2023-10-14, duration=60)
+2025-02-05 09:40:02.717 INFO [main] c.l.e.c.g.d.storage.InMemoryStorage InMemoryStorage initialized successfully
+2025-02-05 09:40:02.780 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=CARDIO)
+2025-02-05 09:40:02.781 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 1
+2025-02-05 09:40:02.781 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=STRENGTH_TRAINING)
+2025-02-05 09:40:02.781 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 2
+2025-02-05 09:40:53.609 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Initializing InMemoryStorage from file: src/main/resources/data/dev-data.csv
+2025-02-05 09:40:53.617 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainer: Trainer(specialization=CARDIO)
+2025-02-05 09:40:53.617 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainee: Trainee(dateOfBirth=1990-01-01, address=123 Main St)
+2025-02-05 09:40:53.619 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded training: Training(id=1, traineeId=2, trainerId=1, name=Morning Cardio Session, type=CARDIO, date=2023-10-14, duration=60)
+2025-02-05 09:40:53.628 INFO [main] c.l.e.c.g.d.storage.InMemoryStorage InMemoryStorage initialized successfully
+2025-02-05 09:40:53.681 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=CARDIO)
+2025-02-05 09:40:53.681 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 1
+2025-02-05 09:40:53.681 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=STRENGTH_TRAINING)
+2025-02-05 09:40:53.681 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 2
+2025-02-05 09:44:30.212 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Initializing InMemoryStorage from file: src/main/resources/data/dev-data.csv
+2025-02-05 09:44:30.215 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainer: Trainer(specialization=CARDIO)
+2025-02-05 09:44:30.215 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainee: Trainee(dateOfBirth=1990-01-01, address=123 Main St)
+2025-02-05 09:44:30.216 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded training: Training(id=1, traineeId=2, trainerId=1, name=Morning Cardio Session, type=CARDIO, date=2023-10-14, duration=60)
+2025-02-05 09:44:30.221 INFO [main] c.l.e.c.g.d.storage.InMemoryStorage InMemoryStorage initialized successfully
+2025-02-05 09:44:30.265 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=CARDIO)
+2025-02-05 09:44:30.266 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 1
+2025-02-05 09:44:30.266 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=STRENGTH_TRAINING)
+2025-02-05 09:44:30.266 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 2
+2025-02-05 09:47:39.733 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Initializing InMemoryStorage from file: src/main/resources/data/dev-data.csv
+2025-02-05 09:47:39.739 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainer: Trainer(specialization=CARDIO)
+2025-02-05 09:47:39.739 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainee: Trainee(dateOfBirth=1990-01-01, address=123 Main St)
+2025-02-05 09:47:39.740 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded training: Training(id=1, traineeId=2, trainerId=1, name=Morning Cardio Session, type=CARDIO, date=2023-10-14, duration=60)
+2025-02-05 09:47:39.748 INFO [main] c.l.e.c.g.d.storage.InMemoryStorage InMemoryStorage initialized successfully
+2025-02-05 09:47:39.802 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=CARDIO)
+2025-02-05 09:47:39.803 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 1
+2025-02-05 09:47:39.803 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=STRENGTH_TRAINING)
+2025-02-05 09:47:39.803 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 2
