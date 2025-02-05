@@ -1,0 +1,4 @@
+invalidrecord
+coder,3,Invalid,User,,password,true,CARDIO
+trainee,10,Jane,Smith,jane.smith,password,true,1990-01-01,123 Main St
+artist,1,2,1,Morning Cardio Session,CARDIO,invalid-date,60
