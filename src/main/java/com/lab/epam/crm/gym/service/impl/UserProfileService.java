@@ -9,6 +9,7 @@ import com.lab.epam.crm.gym.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
@@ -18,6 +19,7 @@ import java.util.List;
 import static lombok.AccessLevel.PRIVATE;
 
 @Component
+@DependsOn({"serviceLogger", "rootLogger"})
 @RequiredArgsConstructor
 @Slf4j
 @FieldDefaults(level = PRIVATE, makeFinal = true)
@@ -29,6 +31,8 @@ public class UserProfileService {
     TrainerDao trainerDao;
 
     protected String generateUsername(UserDto userDto) {
+        log.debug("Generating username for user profile: {}", userDto);
+
         String baseUsername = userDto.getFirstName() + "." + userDto.getLastName();
         int serialNumber = 0;
         String newUsername = baseUsername;
@@ -50,6 +54,8 @@ public class UserProfileService {
     }
 
     protected String generateRandomPassword() {
+        log.trace("Generating password");
+
         StringBuilder sb = new StringBuilder(10);
 
         for (int i = 0; i < 10; i++) {

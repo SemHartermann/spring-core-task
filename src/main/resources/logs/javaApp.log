@@ -43,3 +43,55 @@
 2025-02-05 09:47:39.803 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 1
 2025-02-05 09:47:39.803 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=STRENGTH_TRAINING)
 2025-02-05 09:47:39.803 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 2
+2025-02-05 13:32:22.693 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Initializing InMemoryStorage from file: src/main/resources/data/dev-data.csv
+2025-02-05 13:32:22.696 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainer: Trainer(specialization=CARDIO)
+2025-02-05 13:32:22.697 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainee: Trainee(dateOfBirth=1990-01-01, address=123 Main St)
+2025-02-05 13:32:22.698 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded training: Training(id=1, traineeId=2, trainerId=1, name=Morning Cardio Session, type=CARDIO, date=2023-10-14, duration=60)
+2025-02-05 13:32:22.704 INFO [main] c.l.e.c.g.d.storage.InMemoryStorage InMemoryStorage initialized successfully
+2025-02-05 13:32:53.977 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Initializing InMemoryStorage from file: src/main/resources/data/dev-data.csv
+2025-02-05 13:32:53.982 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainer: Trainer(specialization=CARDIO)
+2025-02-05 13:32:53.983 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainee: Trainee(dateOfBirth=1990-01-01, address=123 Main St)
+2025-02-05 13:32:53.984 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded training: Training(id=1, traineeId=2, trainerId=1, name=Morning Cardio Session, type=CARDIO, date=2023-10-14, duration=60)
+2025-02-05 13:32:53.989 INFO [main] c.l.e.c.g.d.storage.InMemoryStorage InMemoryStorage initialized successfully
+2025-02-05 13:32:54.104 DEBUG [main] c.l.e.c.gym.dao.impl.TraineeDaoImpl Finding all trainees
+2025-02-05 13:32:54.104 INFO [main] c.l.e.c.gym.dao.impl.TraineeDaoImpl Number of trainees found: 1
+2025-02-05 13:32:54.104 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Finding all trainers
+2025-02-05 13:32:54.105 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Number of trainers found: 1
+2025-02-05 13:32:54.148 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=CARDIO)
+2025-02-05 13:32:54.148 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 1
+2025-02-05 13:32:54.148 DEBUG [main] c.l.e.c.gym.dao.impl.TraineeDaoImpl Finding all trainees
+2025-02-05 13:32:54.148 INFO [main] c.l.e.c.gym.dao.impl.TraineeDaoImpl Number of trainees found: 1
+2025-02-05 13:32:54.148 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Finding all trainers
+2025-02-05 13:32:54.148 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Number of trainers found: 1
+2025-02-05 13:32:54.149 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=STRENGTH_TRAINING)
+2025-02-05 13:32:54.149 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 2
+2025-02-05 13:40:21.202 TRACE [main] c.l.e.c.g.d.storage.InMemoryStorage Setting InMemoryStorage dataFilePath: src/main/resources/data/dev-data.csv
+2025-02-05 13:40:21.207 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Initializing InMemoryStorage from file: src/main/resources/data/dev-data.csv
+2025-02-05 13:40:21.208 TRACE [main] c.l.e.c.g.d.storage.InMemoryStorage Processing line: trainer,1,John,Doe,john.doe,password,true,CARDIO
+2025-02-05 13:40:21.210 TRACE [main] c.l.e.c.g.d.storage.InMemoryStorage Processing Trainer line and set fields
+2025-02-05 13:40:21.213 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainer: Trainer(specialization=CARDIO)
+2025-02-05 13:40:21.214 TRACE [main] c.l.e.c.g.d.storage.InMemoryStorage Processing line: trainee,2,Jane,Smith,jane.smith,password,true,1990-01-01,123 Main St
+2025-02-05 13:40:21.214 TRACE [main] c.l.e.c.g.d.storage.InMemoryStorage Processing Trainee line and set fields
+2025-02-05 13:40:21.214 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded trainee: Trainee(dateOfBirth=1990-01-01, address=123 Main St)
+2025-02-05 13:40:21.216 TRACE [main] c.l.e.c.g.d.storage.InMemoryStorage Processing line: training,1,2,1,Morning Cardio Session,CARDIO,2023-10-14,60
+2025-02-05 13:40:21.216 TRACE [main] c.l.e.c.g.d.storage.InMemoryStorage Processing Training line and set fields
+2025-02-05 13:40:21.217 DEBUG [main] c.l.e.c.g.d.storage.InMemoryStorage Loaded training: Training(id=1, traineeId=2, trainerId=1, name=Morning Cardio Session, type=CARDIO, date=2023-10-14, duration=60)
+2025-02-05 13:40:21.228 INFO [main] c.l.e.c.g.d.storage.InMemoryStorage InMemoryStorage initialized successfully
+2025-02-05 13:40:21.358 DEBUG [main] c.l.e.c.g.s.impl.TrainerServiceImpl Creating trainer: TrainerDto(specialization=CARDIO)
+2025-02-05 13:40:21.359 DEBUG [main] c.l.e.c.g.s.impl.UserProfileService Generating username for user profile: TrainerDto(specialization=CARDIO)
+2025-02-05 13:40:21.359 DEBUG [main] c.l.e.c.gym.dao.impl.TraineeDaoImpl Finding all trainees
+2025-02-05 13:40:21.359 INFO [main] c.l.e.c.gym.dao.impl.TraineeDaoImpl Number of trainees found: 1
+2025-02-05 13:40:21.360 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Finding all trainers
+2025-02-05 13:40:21.360 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Number of trainers found: 1
+2025-02-05 13:40:21.360 TRACE [main] c.l.e.c.g.s.impl.UserProfileService Generating password
+2025-02-05 13:40:21.399 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=CARDIO)
+2025-02-05 13:40:21.400 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 1
+2025-02-05 13:40:21.400 DEBUG [main] c.l.e.c.g.s.impl.TrainerServiceImpl Creating trainer: TrainerDto(specialization=STRENGTH_TRAINING)
+2025-02-05 13:40:21.400 DEBUG [main] c.l.e.c.g.s.impl.UserProfileService Generating username for user profile: TrainerDto(specialization=STRENGTH_TRAINING)
+2025-02-05 13:40:21.400 DEBUG [main] c.l.e.c.gym.dao.impl.TraineeDaoImpl Finding all trainees
+2025-02-05 13:40:21.400 INFO [main] c.l.e.c.gym.dao.impl.TraineeDaoImpl Number of trainees found: 1
+2025-02-05 13:40:21.400 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Finding all trainers
+2025-02-05 13:40:21.400 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Number of trainers found: 1
+2025-02-05 13:40:21.400 TRACE [main] c.l.e.c.g.s.impl.UserProfileService Generating password
+2025-02-05 13:40:21.402 DEBUG [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Saving trainer: Trainer(specialization=STRENGTH_TRAINING)
+2025-02-05 13:40:21.402 INFO [main] c.l.e.c.gym.dao.impl.TrainerDaoImpl Trainer saved with ID: 2

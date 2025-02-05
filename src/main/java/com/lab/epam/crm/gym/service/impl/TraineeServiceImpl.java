@@ -8,6 +8,7 @@ import com.lab.epam.crm.gym.service.TraineeService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 import static lombok.AccessLevel.PRIVATE;
 
 @Service
+@DependsOn({"serviceLogger", "rootLogger"})
 @RequiredArgsConstructor
 @FieldDefaults(level = PRIVATE, makeFinal = true)
 @Slf4j

@@ -110,4 +110,14 @@ public class LogbackConfig {
         daoLogger.addAppender(fileAppender);
         return daoLogger;
     }
+
+    @Bean
+    public Logger serviceLogger(LoggerContext ctx, ConsoleAppender<ILoggingEvent> consoleAppender, RollingFileAppender<ILoggingEvent> fileAppender) {
+        Logger daoLogger = ctx.getLogger("com.lab.epam.crm.gym.service.impl");
+        daoLogger.setLevel(Level.toLevel(logLevel, Level.DEBUG));
+        daoLogger.setAdditive(false);
+        daoLogger.addAppender(consoleAppender);
+        daoLogger.addAppender(fileAppender);
+        return daoLogger;
+    }
 }
