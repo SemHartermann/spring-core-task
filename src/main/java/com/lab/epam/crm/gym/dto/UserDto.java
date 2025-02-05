@@ -14,9 +14,5 @@ public abstract class UserDto {
 
     String lastName;
 
-    String username;
-
-    String password;
-
     boolean isActive;
 }
