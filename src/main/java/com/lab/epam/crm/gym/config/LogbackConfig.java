@@ -29,7 +29,7 @@ public class LogbackConfig {
     String logLevel;
 
     public LogbackConfig(@Value("${logging.file.dir}") String logFileDir,
-                         @Value("${logging.level}")String logLevel) {
+                         @Value("${logging.level}") String logLevel) {
         this.logFileDir = logFileDir;
         this.logLevel = logLevel;
     }

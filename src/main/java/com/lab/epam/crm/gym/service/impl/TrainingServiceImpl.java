@@ -34,20 +34,20 @@ public class TrainingServiceImpl implements TrainingService {
     }
 
     @Override
-    public TrainingDto getById(int id) {
+    public TrainingDto getById(Integer id) {
         log.debug("Finding training by ID: {}", id);
-        
+
         Training training = trainingDao.findById(id);
-        
+
         return trainingMapper.toDto(training);
     }
 
     @Override
     public List<TrainingDto> getAll() {
         log.debug("Finding all trainings");
-        
+
         List<Training> trainings = trainingDao.findAll();
-        
+
         return trainingMapper.toDtoList(trainings);
     }
 }

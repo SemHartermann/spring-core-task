@@ -21,7 +21,7 @@ import static lombok.AccessLevel.PRIVATE;
 @Getter
 @Slf4j
 @FieldDefaults(level = PRIVATE, makeFinal = true)
-public class InMemoryStorage{
+public class InMemoryStorage {
     String dataFilePath;
 
     Map<Integer, Trainer> trainers = new HashMap<>();
@@ -126,7 +126,7 @@ public class InMemoryStorage{
         }
     }
 
-    private void setUserFieldsFromLine (User user, String[] values) {
+    private void setUserFieldsFromLine(User user, String[] values) {
         user.setId(Integer.parseInt(values[1]));
         user.setFirstName(values[2]);
         user.setLastName(values[3]);

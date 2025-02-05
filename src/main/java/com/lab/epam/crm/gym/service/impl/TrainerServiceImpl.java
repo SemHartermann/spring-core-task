@@ -32,7 +32,7 @@ public class TrainerServiceImpl implements TrainerService {
         log.debug("Creating trainer: {}", trainerDto);
 
         Trainer trainer = trainerMapper.toEntity(trainerDto);
-        
+
         trainer.setUsername(userProfileService.generateUsername(trainerDto));
         trainer.setPassword(userProfileService.generateRandomPassword());
 
@@ -44,7 +44,7 @@ public class TrainerServiceImpl implements TrainerService {
         log.debug("Updating trainer: {}", trainerDto);
 
         Trainer trainer = trainerMapper.toEntity(trainerDto);
-        
+
         trainerDao.update(trainer);
     }
 
@@ -52,16 +52,16 @@ public class TrainerServiceImpl implements TrainerService {
     public TrainerDto getById(Integer id) {
         log.debug("Finding trainer by ID: {}", id);
         Trainer trainer = trainerDao.findById(id);
-        
+
         return trainerMapper.toDto(trainer);
     }
 
     @Override
     public List<TrainerDto> getAll() {
         log.debug("Finding all trainers");
-        
+
         List<Trainer> trainers = trainerDao.findAll();
-        
+
         return trainerMapper.toDtoList(trainers);
     }
 }

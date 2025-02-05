@@ -2,13 +2,9 @@ package com.lab.epam.crm.gym;
 
 import com.lab.epam.crm.gym.config.AppConfig;
 import com.lab.epam.crm.gym.config.LogbackConfig;
-import com.lab.epam.crm.gym.dao.TrainerDao;
 import com.lab.epam.crm.gym.dto.TrainerDto;
-import com.lab.epam.crm.gym.entity.Trainer;
 import com.lab.epam.crm.gym.entity.TrainingType;
 import com.lab.epam.crm.gym.service.TrainerService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {

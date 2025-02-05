@@ -7,7 +7,7 @@ import java.util.List;
 public interface TrainingService {
     void create(TrainingDto training);
 
-    TrainingDto getById(int id);
+    TrainingDto getById(Integer id);
 
     List<TrainingDto> getAll();
 }
