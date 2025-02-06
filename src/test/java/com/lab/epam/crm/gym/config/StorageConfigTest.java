@@ -1,23 +1,21 @@
-package com.lab.epam.crm.gym.dao.storage;
+package com.lab.epam.crm.gym.config;
 
-import com.lab.epam.crm.gym.dao.storage.InMemoryStorage;
-import com.lab.epam.crm.gym.entity.*;
+import com.lab.epam.crm.gym.entity.Trainee;
+import com.lab.epam.crm.gym.entity.Trainer;
+import com.lab.epam.crm.gym.entity.Training;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.springframework.test.util.ReflectionTestUtils;
-
-public class InMemoryStorageTest {
+public class StorageConfigTest {
     @InjectMocks
-    private InMemoryStorage inMemoryStorage;
+    private StorageConfig storage;
 
     @BeforeEach
     public void setup() {
@@ -26,12 +24,12 @@ public class InMemoryStorageTest {
 
     @Test
     public void testInitWithValidData() {
-        ReflectionTestUtils.setField(inMemoryStorage, "dataFilePath", "src/test/resources/data/valid-data.csv");
-        inMemoryStorage.init();
+        ReflectionTestUtils.setField(storage, "dataFilePath", "src/test/resources/data/valid-data.csv");
+        storage.init();
 
-        Map<Integer, Trainer> trainers = inMemoryStorage.getTrainers();
-        Map<Integer, Trainee> trainees = inMemoryStorage.getTrainees();
-        Map<Integer, Training> trainings = inMemoryStorage.getTrainings();
+        Map<Integer, Trainer> trainers = storage.trainerStorage();
+        Map<Integer, Trainee> trainees = storage.traineeStorage();
+        Map<Integer, Training> trainings = storage.trainingStorage();
 
         assertEquals(1, trainers.size());
         assertEquals(1, trainees.size());
@@ -51,12 +49,12 @@ public class InMemoryStorageTest {
 
     @Test
     public void testInitWithInvalidData() {
-        ReflectionTestUtils.setField(inMemoryStorage, "dataFilePath", "src/test/resources/data/invalid-data.csv");
-        inMemoryStorage.init();
+        ReflectionTestUtils.setField(storage, "dataFilePath", "src/test/resources/data/invalid-data.csv");
+        storage.init();
 
-        Map<Integer, Trainer> trainers = inMemoryStorage.getTrainers();
-        Map<Integer, Trainee> trainees = inMemoryStorage.getTrainees();
-        Map<Integer, Training> trainings = inMemoryStorage.getTrainings();
+        Map<Integer, Trainer> trainers = storage.trainerStorage();
+        Map<Integer, Trainee> trainees = storage.traineeStorage();
+        Map<Integer, Training> trainings = storage.trainingStorage();
 
         assertEquals(0, trainers.size());
         assertEquals(1, trainees.size());

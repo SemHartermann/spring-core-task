@@ -1,6 +1,5 @@
 package com.lab.epam.crm.gym.dao.impl;
 
-import com.lab.epam.crm.gym.dao.storage.InMemoryStorage;
 import com.lab.epam.crm.gym.entity.Trainer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class TrainerDaoImplTest {
 
     @Mock
-    private InMemoryStorage inMemoryStorage;
+    private Map<Integer, Trainer> storage;
 
     @InjectMocks
     private TrainerDaoImpl trainerDao;
@@ -38,22 +37,22 @@ public class TrainerDaoImplTest {
         trainerMap = new HashMap<>();
         trainerMap.put(1, trainer);
 
-        when(inMemoryStorage.getTrainers()).thenReturn(trainerMap);
+        when(storage).thenReturn(trainerMap);
     }
 
     @Test
     public void testSaveTrainer() {
         trainerDao.save(trainer);
 
-        verify(inMemoryStorage, times(1)).getTrainers();
-        assertEquals(trainer, inMemoryStorage.getTrainers().get(1));
+        verify(storage, times(1));
+        assertEquals(trainer, storage.get(1));
     }
 
     @Test
     public void testFindById() {
         Trainer foundTrainer = trainerDao.findById(1);
 
-        verify(inMemoryStorage, times(1)).getTrainers();
+        verify(storage, times(1));
         assertEquals(trainer, foundTrainer);
     }
 
@@ -61,7 +60,7 @@ public class TrainerDaoImplTest {
     public void testFindAll() {
         List<Trainer> trainers = trainerDao.findAll();
 
-        verify(inMemoryStorage, times(1)).getTrainers();
+        verify(storage, times(1));
         assertEquals(1, trainers.size());
         assertEquals(trainer, trainers.get(0));
     }
@@ -75,15 +74,15 @@ public class TrainerDaoImplTest {
 
         trainerDao.update(updatedTrainer);
 
-        verify(inMemoryStorage, atLeastOnce()).getTrainers();
-        assertEquals(updatedTrainer, inMemoryStorage.getTrainers().get(1));
+        verify(storage, atLeastOnce());
+        assertEquals(updatedTrainer, storage.get(1));
     }
 
     @Test
     public void testDeleteById() {
         trainerDao.deleteById(1);
 
-        verify(inMemoryStorage, times(1)).getTrainers();
-        assertEquals(0, inMemoryStorage.getTrainers().size());
+        verify(storage, times(1));
+        assertEquals(0, storage.size());
     }
 }

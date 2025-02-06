@@ -1,6 +1,5 @@
 package com.lab.epam.crm.gym.dao.impl;
 
-import com.lab.epam.crm.gym.dao.storage.InMemoryStorage;
 import com.lab.epam.crm.gym.entity.Trainee;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class TraineeDaoImplTest {
 
     @Mock
-    private InMemoryStorage inMemoryStorage;
+    private Map<Integer, Trainee> storage;
 
     @InjectMocks
     private TraineeDaoImpl traineeDao;
@@ -38,22 +37,22 @@ public class TraineeDaoImplTest {
         traineeMap = new HashMap<>();
         traineeMap.put(1, trainee);
 
-        when(inMemoryStorage.getTrainees()).thenReturn(traineeMap);
+        storage = traineeMap;
     }
 
     @Test
     public void testSaveTrainee() {
         traineeDao.save(trainee);
 
-        verify(inMemoryStorage, times(1)).getTrainees();
-        assertEquals(trainee, inMemoryStorage.getTrainees().get(1));
+        verify(storage, times(1));
+        assertEquals(trainee, storage.get(1));
     }
 
     @Test
     public void testFindById() {
         Trainee foundTrainee = traineeDao.findById(1);
 
-        verify(inMemoryStorage, times(1)).getTrainees();
+        verify(storage, times(1));
         assertEquals(trainee, foundTrainee);
     }
 
@@ -61,7 +60,7 @@ public class TraineeDaoImplTest {
     public void testFindAll() {
         List<Trainee> trainees = traineeDao.findAll();
 
-        verify(inMemoryStorage, times(1)).getTrainees();
+        verify(storage, times(1));
         assertEquals(1, trainees.size());
         assertEquals(trainee, trainees.get(0));
     }
@@ -75,15 +74,15 @@ public class TraineeDaoImplTest {
 
         traineeDao.update(updatedTrainee);
 
-        verify(inMemoryStorage, atLeastOnce()).getTrainees();
-        assertEquals(updatedTrainee, inMemoryStorage.getTrainees().get(1));
+        verify(storage, atLeastOnce());
+        assertEquals(updatedTrainee, storage.get(1));
     }
 
     @Test
     public void testDeleteById() {
         traineeDao.deleteById(1);
 
-        verify(inMemoryStorage, times(1)).getTrainees();
-        assertEquals(0, inMemoryStorage.getTrainees().size());
+        verify(storage, times(1));
+        assertEquals(0, storage.size());
     }
 }

@@ -1,6 +1,5 @@
 package com.lab.epam.crm.gym.dao.impl;
 
-import com.lab.epam.crm.gym.dao.storage.InMemoryStorage;
 import com.lab.epam.crm.gym.entity.Training;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class TrainingDaoImplTest {
 
     @Mock
-    private InMemoryStorage inMemoryStorage;
+    private Map<Integer, Training> storage;
 
     @InjectMocks
     private TrainingDaoImpl trainingDao;
@@ -39,22 +38,22 @@ public class TrainingDaoImplTest {
         trainingMap = new HashMap<>();
         trainingMap.put(1, training);
 
-        when(inMemoryStorage.getTrainings()).thenReturn(trainingMap);
+        when(storage).thenReturn(trainingMap);
     }
 
     @Test
     public void testSaveTraining() {
         trainingDao.save(training);
 
-        verify(inMemoryStorage, times(1)).getTrainings();
-        assertEquals(training, inMemoryStorage.getTrainings().get(1));
+        verify(storage, times(1));
+        assertEquals(training, storage.get(1));
     }
 
     @Test
     public void testFindById() {
         Training foundTraining = trainingDao.findById(1);
 
-        verify(inMemoryStorage, times(1)).getTrainings();
+        verify(storage, times(1));
         assertEquals(training, foundTraining);
     }
 
@@ -62,7 +61,7 @@ public class TrainingDaoImplTest {
     public void testFindAll() {
         List<Training> trainings = trainingDao.findAll();
 
-        verify(inMemoryStorage, times(1)).getTrainings();
+        verify(storage, times(1));
         assertEquals(1, trainings.size());
         assertEquals(training, trainings.get(0));
     }
@@ -77,15 +76,15 @@ public class TrainingDaoImplTest {
 
         trainingDao.update(updatedTraining);
 
-        verify(inMemoryStorage, atLeastOnce()).getTrainings();
-        assertEquals(updatedTraining, inMemoryStorage.getTrainings().get(1));
+        verify(storage, atLeastOnce());
+        assertEquals(updatedTraining, storage.get(1));
     }
 
     @Test
     public void testDeleteById() {
         trainingDao.deleteById(1);
 
-        verify(inMemoryStorage, times(1)).getTrainings();
-        assertEquals(0, inMemoryStorage.getTrainings().size());
+        verify(storage, times(1));
+        assertEquals(0, storage.size());
     }
 }

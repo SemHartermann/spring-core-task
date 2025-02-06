@@ -1,7 +1,6 @@
 package com.lab.epam.crm.gym.dao.impl;
 
 import com.lab.epam.crm.gym.dao.TrainingDao;
-import com.lab.epam.crm.gym.dao.storage.InMemoryStorage;
 import com.lab.epam.crm.gym.entity.Training;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @DependsOn({"daoLogger", "rootLogger"})
@@ -19,13 +19,13 @@ import java.util.List;
 @Slf4j
 public class TrainingDaoImpl implements TrainingDao {
 
-    InMemoryStorage storage;
+    Map<Integer, Training> storage;
 
     @Override
     public void save(Training training) {
         log.debug("Saving training: {}", training);
 
-        storage.getTrainings().put(training.getId(), training);
+        storage.put(training.getId(), training);
 
         log.info("Training saved with ID: {}", training.getId());
     }
@@ -34,7 +34,7 @@ public class TrainingDaoImpl implements TrainingDao {
     public Training findById(int id) {
         log.debug("Finding training by ID: {}", id);
 
-        Training training = storage.getTrainings().get(id);
+        Training training = storage.get(id);
 
         if (training == null) {
             log.warn("Training with ID {} not found", id);
@@ -49,7 +49,7 @@ public class TrainingDaoImpl implements TrainingDao {
     public List<Training> findAll() {
         log.debug("Finding all trainings");
 
-        List<Training> trainings = new ArrayList<>(storage.getTrainings().values());
+        List<Training> trainings = new ArrayList<>(storage.values());
 
         log.info("Number of trainings found: {}", trainings.size());
 
@@ -60,8 +60,8 @@ public class TrainingDaoImpl implements TrainingDao {
     public void update(Training training) {
         log.debug("Updating training: {}", training);
 
-        if (storage.getTrainings().containsKey(training.getId())) {
-            storage.getTrainings().put(training.getId(), training);
+        if (storage.containsKey(training.getId())) {
+            storage.put(training.getId(), training);
 
             log.info("Training updated with ID: {}", training.getId());
         } else {
@@ -73,7 +73,7 @@ public class TrainingDaoImpl implements TrainingDao {
     public void deleteById(int id) {
         log.debug("Deleting training by ID: {}", id);
 
-        if (storage.getTrainings().remove(id) != null) {
+        if (storage.remove(id) != null) {
             log.info("Training deleted with ID: {}", id);
         } else {
             log.warn("Training with ID {} not found for deletion", id);
