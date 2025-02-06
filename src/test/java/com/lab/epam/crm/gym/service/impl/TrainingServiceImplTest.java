@@ -4,7 +4,6 @@ import com.lab.epam.crm.gym.dao.TrainingDao;
 import com.lab.epam.crm.gym.dto.TrainingDto;
 import com.lab.epam.crm.gym.entity.Training;
 import com.lab.epam.crm.gym.mapper.TrainingMapper;
-import com.lab.epam.crm.gym.service.TrainingService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

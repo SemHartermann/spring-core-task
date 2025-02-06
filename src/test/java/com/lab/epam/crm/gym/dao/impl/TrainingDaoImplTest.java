@@ -1,6 +1,6 @@
 package com.lab.epam.crm.gym.dao.impl;
 
-import com.lab.epam.crm.gym.dao.storage.InMemoryStorage;
+import com.lab.epam.crm.gym.dao.storage.TrainingStorage;
 import com.lab.epam.crm.gym.entity.Training;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 public class TrainingDaoImplTest {
 
     @Mock
-    private InMemoryStorage inMemoryStorage;
+    private TrainingStorage inMemoryStorage;
 
     @InjectMocks
     private TrainingDaoImpl trainingDao;

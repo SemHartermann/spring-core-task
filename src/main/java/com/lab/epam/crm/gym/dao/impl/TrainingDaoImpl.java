@@ -1,7 +1,7 @@
 package com.lab.epam.crm.gym.dao.impl;
 
 import com.lab.epam.crm.gym.dao.TrainingDao;
-import com.lab.epam.crm.gym.dao.storage.InMemoryStorage;
+import com.lab.epam.crm.gym.dao.storage.TrainingStorage;
 import com.lab.epam.crm.gym.entity.Training;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -19,7 +19,7 @@ import java.util.List;
 @Slf4j
 public class TrainingDaoImpl implements TrainingDao {
 
-    InMemoryStorage storage;
+    TrainingStorage storage;
 
     @Override
     public void save(Training training) {

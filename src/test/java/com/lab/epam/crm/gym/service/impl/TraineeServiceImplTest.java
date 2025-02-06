@@ -4,14 +4,13 @@ import com.lab.epam.crm.gym.dao.TraineeDao;
 import com.lab.epam.crm.gym.dto.TraineeDto;
 import com.lab.epam.crm.gym.entity.Trainee;
 import com.lab.epam.crm.gym.mapper.TraineeMapper;
-import com.lab.epam.crm.gym.service.TraineeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
