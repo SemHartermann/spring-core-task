@@ -29,6 +29,12 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public void create(TrainerDto trainerDto) {
+        if (trainerDto.getFirstName().isBlank() || trainerDto.getLastName().isBlank()) {
+            log.error("Error creating trainer: {}", trainerDto);
+
+            throw new IllegalArgumentException("First name and last name cannot be empty");
+        }
+
         log.debug("Creating trainer: {}", trainerDto);
 
         Trainer trainer = trainerMapper.toEntity(trainerDto);
@@ -41,6 +47,12 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public void update(TrainerDto trainerDto) {
+        if (trainerDto.getFirstName().isBlank() || trainerDto.getLastName().isBlank()) {
+            log.error("Error updating trainer: {}", trainerDto);
+
+            throw new IllegalArgumentException("First name and last name cannot be empty");
+        }
+
         log.debug("Updating trainer: {}", trainerDto);
 
         Trainer trainer = trainerMapper.toEntity(trainerDto);

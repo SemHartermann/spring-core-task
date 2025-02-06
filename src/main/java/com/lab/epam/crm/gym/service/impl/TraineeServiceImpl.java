@@ -29,6 +29,12 @@ public class TraineeServiceImpl implements TraineeService {
 
     @Override
     public void create(TraineeDto traineeDto) {
+        if (traineeDto.getFirstName().isBlank() || traineeDto.getLastName().isBlank()) {
+            log.error("Error creating trainee: {}", traineeDto);
+
+            throw new IllegalArgumentException("First name and last name cannot be empty");
+        }
+
         log.debug("Creating trainee: {}", traineeDto);
 
         Trainee trainee = traineeMapper.toEntity(traineeDto);
@@ -41,6 +47,12 @@ public class TraineeServiceImpl implements TraineeService {
 
     @Override
     public void update(TraineeDto traineeDto) {
+        if (traineeDto.getFirstName().isBlank() || traineeDto.getLastName().isBlank()) {
+            log.error("Error updating trainee: {}", traineeDto);
+
+            throw new IllegalArgumentException("First name and last name cannot be empty");
+        }
+
         log.debug("Updating trainee: {}", traineeDto);
 
         Trainee trainee = traineeMapper.toEntity(traineeDto);
