@@ -1,24 +1,37 @@
 package com.lab.epam.crm.gym.entity;
 
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import static lombok.AccessLevel.PRIVATE;
+import java.util.Date;
 
-@Data
-@FieldDefaults(level = PRIVATE)
-public class Training {
-    Integer id;
+@Entity
+@Table(name = "trainings")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class Training extends BaseEntity{
+    @ManyToOne
+    @JoinColumn(name = "trainee_id")
+    Trainee trainee;
 
-    Integer traineeId;
+    @ManyToOne
+    @JoinColumn(name = "trainer_id")
+    Trainer trainer;
 
-    Integer trainerId;
+    @Column(name = "training_name", nullable = false)
+    String trainingName;
 
-    String name;
+    @ManyToOne
+    @JoinColumn(name = "training_type_id")
+    TrainingType trainingType;
 
-    TrainingType type;
+    @Column(name = "training_date", nullable = false)
+    Date trainingDate;
 
-    String date;
-
-    int duration;
+    @Column(name = "training_duration", nullable = false)
+    Integer trainingDuration;
 }

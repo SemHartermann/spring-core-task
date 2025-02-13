@@ -1,14 +1,31 @@
 package com.lab.epam.crm.gym.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.*;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import static lombok.AccessLevel.PRIVATE;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
-@FieldDefaults(level = PRIVATE)
-@EqualsAndHashCode(callSuper = true)
-public class Trainer extends User {
+@Entity
+@Table(name = "trainers")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class Trainer extends BaseEntity{
+    @ManyToOne
+    @JoinColumn(name = "specialization_id")
     TrainingType specialization;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToMany(mappedBy = "trainers")
+    Set<Trainee> trainees = new HashSet<>();
+
+    @OneToMany(mappedBy = "trainer")
+    Set<Training> trainings = new HashSet<>();
 }

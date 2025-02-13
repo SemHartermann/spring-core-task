@@ -1,28 +1,32 @@
 package com.lab.epam.crm.gym.entity;
 
-import lombok.Data;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.experimental.FieldDefaults;
+import lombok.Setter;
 
-
-import static lombok.AccessLevel.PRIVATE;
-
-@Data
+@Entity
+@Table(name = "users")
 @NoArgsConstructor
-@FieldDefaults(level = PRIVATE)
-public abstract class User {
-    Integer id;
-
-    @NonNull
+@AllArgsConstructor
+@Getter
+@Setter
+public class User extends BaseEntity {
+    @Column(name = "first_name", nullable = false)
     String firstName;
 
-    @NonNull
+    @Column(name = "last_name", nullable = false)
     String lastName;
 
+    @Column(name = "username", nullable = false, unique = true)
     String username;
 
+    @Column(name = "password", nullable = false)
     String password;
 
-    boolean isActive;
+    @Column(name = "is_active", nullable = false)
+    Boolean isActive;
 }
