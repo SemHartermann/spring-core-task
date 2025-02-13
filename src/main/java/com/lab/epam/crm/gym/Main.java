@@ -1,6 +1,7 @@
 package com.lab.epam.crm.gym;
 
 import com.lab.epam.crm.gym.config.AppConfig;
+import com.lab.epam.crm.gym.config.HibernateConfig;
 import com.lab.epam.crm.gym.config.LogbackConfig;
 import com.lab.epam.crm.gym.dao.storage.TrainerStorage;
 import com.lab.epam.crm.gym.dto.TrainerDto;
@@ -15,6 +16,7 @@ public class Main {
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext()) {
             context.register(AppConfig.class);
             context.register(LogbackConfig.class);
+            context.register(HibernateConfig.class);
             context.refresh();
 
             TrainerService trainerService = context.getBean(TrainerService.class);
