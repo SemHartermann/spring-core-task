@@ -1,23 +1,17 @@
 package com.lab.epam.crm.gym.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import static lombok.AccessLevel.PRIVATE;
-
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@FieldDefaults(level = PRIVATE)
-public abstract class UserDto {
-    Integer id;
-
-    @NonNull
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class UserDto extends BaseDto {
     String firstName;
-
-    @NonNull
     String lastName;
-
-    boolean isActive;
+    String username;
+    String password;
+    Boolean isActive;
 }

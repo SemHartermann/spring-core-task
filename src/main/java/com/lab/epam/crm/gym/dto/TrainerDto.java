@@ -1,15 +1,16 @@
 package com.lab.epam.crm.gym.dto;
 
-import com.lab.epam.crm.gym.entity.TrainingType;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import static lombok.AccessLevel.PRIVATE;
+import java.util.Set;
 
-@Data
-@FieldDefaults(level = PRIVATE)
-@EqualsAndHashCode(callSuper = true)
-public class TrainerDto extends UserDto {
-    TrainingType specialization;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class TrainerDto extends BaseDto {
+    TrainingTypeDto specialization;
+    UserDto user;
 }

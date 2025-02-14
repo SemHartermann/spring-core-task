@@ -1,25 +1,20 @@
 package com.lab.epam.crm.gym.dto;
 
-import com.lab.epam.crm.gym.entity.TrainingType;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import static lombok.AccessLevel.PRIVATE;
+import java.util.Date;
 
-@Data
-@FieldDefaults(level = PRIVATE)
-public class TrainingDto {
-    Integer id;
-
-    Integer traineeId;
-
-    Integer trainerId;
-
-    String name;
-
-    TrainingType type;
-
-    String date;
-
-    int duration;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class TrainingDto extends BaseDto {
+    TraineeDto trainee;
+    TrainerDto trainer;
+    String trainingName;
+    TrainingTypeDto trainingType;
+    Date trainingDate;
+    Integer trainingDuration;
 }
