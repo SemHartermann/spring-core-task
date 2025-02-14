@@ -2,17 +2,17 @@ package com.lab.epam.crm.gym.mapper;
 
 import com.lab.epam.crm.gym.dto.TrainingDto;
 import com.lab.epam.crm.gym.entity.Training;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-
-import java.util.List;
+import org.springframework.core.convert.converter.Converter;
+import org.mapstruct.extensions.spring.DelegatingConverter;
 
 @Mapper(componentModel = "spring")
-public interface TrainingMapper {
-    TrainingDto toDto(Training training);
+public interface TrainingMapper extends Converter<Training, TrainingDto> {
+    @Override
+    TrainingDto convert(Training training);
 
-    Training toEntity(TrainingDto trainingDto);
-
-    List<TrainingDto> toDtoList(List<Training> trainings);
-
-    List<Training> toEntityList(List<TrainingDto> trainingDtos);
+    @InheritInverseConfiguration
+    @DelegatingConverter
+    Training invertConvert(TrainingDto trainingDto);
 }
