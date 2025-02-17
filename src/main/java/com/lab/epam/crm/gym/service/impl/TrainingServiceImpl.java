@@ -1,53 +1,79 @@
 package com.lab.epam.crm.gym.service.impl;
 
-import com.lab.epam.crm.gym.dao.TrainingDao;
+import com.lab.epam.crm.gym.dto.TrainerDto;
 import com.lab.epam.crm.gym.dto.TrainingDto;
 import com.lab.epam.crm.gym.entity.Training;
-import com.lab.epam.crm.gym.mapper.TrainingMapper;
+import com.lab.epam.crm.gym.entity.Trainee;
+import com.lab.epam.crm.gym.entity.Trainer;
+import com.lab.epam.crm.gym.entity.TrainingType;
+import com.lab.epam.crm.gym.repository.TrainingRepository;
+import com.lab.epam.crm.gym.repository.TrainingTypeRepository;
+import com.lab.epam.crm.gym.repository.TraineeRepository;
+import com.lab.epam.crm.gym.repository.TrainerRepository;
 import com.lab.epam.crm.gym.service.TrainingService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
-import static lombok.AccessLevel.PRIVATE;
-
-@Service
-@DependsOn({"serviceLogger", "rootLogger"})
-@RequiredArgsConstructor
-@FieldDefaults(level = PRIVATE, makeFinal = true)
 @Slf4j
+@Service
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class TrainingServiceImpl implements TrainingService {
+    TrainingRepository trainingRepository;
+    
+    ConversionService conversionService;
 
-    TrainingDao trainingDao;
-    TrainingMapper trainingMapper;
-
+    @Transactional
     @Override
-    public void create(TrainingDto trainingDto) {
-        log.debug("Creating training: {}", trainingDto);
+    public TrainingDto createTraining(TrainingDto trainingDto) {
+        log.trace("Adding training {}", trainingDto);
 
-        Training training = trainingMapper.toEntity(trainingDto);
-        trainingDao.save(training);
+        Training training = conversionService.convert(trainingDto, Training.class);
+        training = trainingRepository.save(Objects.requireNonNull(training));
+
+        log.debug("Training added {}", training);
+        return conversionService.convert(training, TrainingDto.class);
     }
 
     @Override
-    public TrainingDto getById(Integer id) {
-        log.debug("Finding training by ID: {}", id);
+    public TrainingDto getTrainingById(Integer id) {
+        log.trace("Fetching training by id: {}", id);
 
-        Training training = trainingDao.findById(id);
+        Training training = trainingRepository.findById(id).get();
 
-        return trainingMapper.toDto(training);
+        log.debug("Training was found by id: {}", id);
+
+        return conversionService.convert(training, TrainingDto.class);
     }
 
     @Override
-    public List<TrainingDto> getAll() {
-        log.debug("Finding all trainings");
+    public List<TrainingDto> getTraineeTrainings(String username, Date fromDate, Date toDate) {
+        log.trace("Fetching trainings for trainee: {} from date: {} to date: {}", username, fromDate, toDate);
 
-        List<Training> trainings = trainingDao.findAll();
+        return trainingRepository.findAllByTraineeUserUsernameAndTrainingDateBetween(username, fromDate, toDate)
+                .stream()
+                .map(training -> conversionService.convert(training, TrainingDto.class))
+                .collect(Collectors.toList());
+    }
 
-        return trainingMapper.toDtoList(trainings);
+    @Override
+    public List<TrainingDto> getTrainerTrainings(String username, Date fromDate, Date toDate) {
+        log.trace("Fetching trainings for trainer: {} from date: {} to date: {}", username, fromDate, toDate);
+
+        return trainingRepository.findAllByTrainerUserUsernameAndTrainingDateBetween(username, fromDate, toDate)
+                .stream()
+                .map(training -> conversionService.convert(training, TrainingDto.class))
+                .collect(Collectors.toList());
     }
 }

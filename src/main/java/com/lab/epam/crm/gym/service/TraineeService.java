@@ -1,17 +1,34 @@
 package com.lab.epam.crm.gym.service;
 
 import com.lab.epam.crm.gym.dto.TraineeDto;
+import com.lab.epam.crm.gym.dto.TrainingDto;
+import com.lab.epam.crm.gym.dto.TrainerDto;
 
+import java.util.Date;
 import java.util.List;
 
 public interface TraineeService {
-    void create(TraineeDto trainee);
+    TraineeDto createTrainee(TraineeDto traineeDto);
 
-    void update(TraineeDto trainee);
+    TraineeDto getTraineeByUsername(String username);
 
-    void deleteById(Integer id);
+    TraineeDto getTraineeById(Integer id);
 
-    TraineeDto getById(Integer id);
+    TraineeDto updateTraineeProfile(TraineeDto traineeDto);
 
-    List<TraineeDto> getAll();
+    TraineeDto updateTraineePassword(TraineeDto traineeDto, String newPassword);
+
+    TraineeDto activateTrainee(TraineeDto traineeDto);
+
+    TraineeDto deactivateTrainee(TraineeDto traineeDto);
+
+    void deleteTraineeProfileByUsername(String username);
+
+    List<TrainingDto> getTraineeTrainings(String username, Date fromDate, Date toDate, String trainerName, String trainingType);
+
+    List<TrainerDto> getUnassignedTrainers(String username);
+
+    TraineeDto updateTraineeTrainersList(Integer traineeId, List<Integer> trainerIds);
+
+    TraineeDto authenticate(String username, String password);
 }

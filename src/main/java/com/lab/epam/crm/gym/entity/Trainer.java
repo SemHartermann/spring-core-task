@@ -19,7 +19,7 @@ public class Trainer extends BaseEntity{
     @JoinColumn(name = "specialization_id")
     TrainingType specialization;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

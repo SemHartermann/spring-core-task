@@ -1,79 +1,136 @@
 package com.lab.epam.crm.gym.service.impl;
 
-import com.lab.epam.crm.gym.dao.TrainerDao;
 import com.lab.epam.crm.gym.dto.TrainerDto;
+import com.lab.epam.crm.gym.dto.UserRequestDto;
 import com.lab.epam.crm.gym.entity.Trainer;
-import com.lab.epam.crm.gym.mapper.TrainerMapper;
+import com.lab.epam.crm.gym.repository.TrainerRepository;
 import com.lab.epam.crm.gym.service.TrainerService;
+import com.lab.epam.crm.gym.service.UserService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Objects;
 
-import static lombok.AccessLevel.PRIVATE;
-
-@Service
-@DependsOn({"serviceLogger", "rootLogger"})
-@RequiredArgsConstructor
-@FieldDefaults(level = PRIVATE, makeFinal = true)
 @Slf4j
+@Service
+@RequiredArgsConstructor()
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class TrainerServiceImpl implements TrainerService {
-    UserProfileService userProfileService;
+    TrainerRepository trainerRepository;
+    UserService userService;
+    ConversionService conversionService;
 
-    TrainerDao trainerDao;
-
-    TrainerMapper trainerMapper;
-
+    @Transactional
     @Override
-    public void create(TrainerDto trainerDto) {
-        if (trainerDto.getFirstName().isBlank() || trainerDto.getLastName().isBlank()) {
-            log.error("Error creating trainer: {}", trainerDto);
+    public TrainerDto createTrainer(TrainerDto trainerDto) {
+        log.trace("Creating trainer with first name: {} and last name: {}", trainerDto.getUser().getFirstName(), trainerDto.getUser().getLastName());
 
-            throw new IllegalArgumentException("First name and last name cannot be empty");
-        }
+        UserRequestDto userRequestDto = userService.createUser(trainerDto.getUser());
 
-        log.debug("Creating trainer: {}", trainerDto);
+        trainerDto.setUser(userRequestDto);
 
-        Trainer trainer = trainerMapper.toEntity(trainerDto);
+        Trainer trainer = conversionService.convert(trainerDto, Trainer.class);
+        trainer = trainerRepository.save(Objects.requireNonNull(trainer));
 
-        trainer.setUsername(userProfileService.generateUsername(trainerDto));
-        trainer.setPassword(userProfileService.generateRandomPassword());
+        log.debug("Trainer created with user: {}", userRequestDto.getUsername());
 
-        trainerDao.save(trainer);
+        return conversionService.convert(trainer, TrainerDto.class);
     }
 
     @Override
-    public void update(TrainerDto trainerDto) {
-        if (trainerDto.getFirstName().isBlank() || trainerDto.getLastName().isBlank()) {
-            log.error("Error updating trainer: {}", trainerDto);
+    public TrainerDto getTrainerById(Integer id) {
+        log.trace("Fetching trainer by id: {}", id);
 
-            throw new IllegalArgumentException("First name and last name cannot be empty");
-        }
+        Trainer trainer = trainerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Trainer not found"));
 
-        log.debug("Updating trainer: {}", trainerDto);
+        log.debug("Trainer was found by id: {}", id);
 
-        Trainer trainer = trainerMapper.toEntity(trainerDto);
-
-        trainerDao.update(trainer);
+        return conversionService.convert(trainer, TrainerDto.class);
     }
 
     @Override
-    public TrainerDto getById(Integer id) {
-        log.debug("Finding trainer by ID: {}", id);
-        Trainer trainer = trainerDao.findById(id);
+    public TrainerDto getTrainerByUsername(String username) {
+        log.trace("Fetching trainer by username: {}", username);
 
-        return trainerMapper.toDto(trainer);
+        Trainer trainer = trainerRepository.findByUserUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Trainer not found"));
+
+        log.debug("Trainer was found by username: {}", username);
+
+        return conversionService.convert(trainer, TrainerDto.class);
     }
 
     @Override
-    public List<TrainerDto> getAll() {
-        log.debug("Finding all trainers");
+    public TrainerDto authenticate(String username, String password) {
+        log.trace("Authenticating trainer with username: {}", username);
 
-        List<Trainer> trainers = trainerDao.findAll();
+        userService.authenticate(username, password);
 
-        return trainerMapper.toDtoList(trainers);
+        Trainer trainer = trainerRepository.findByUserUsername(username).get();
+
+        return conversionService.convert(trainer, TrainerDto.class);
+    }
+
+    @Override
+    public TrainerDto updateTrainerProfile(TrainerDto trainerDto) {
+        log.trace("Updating profile for trainer: {}", trainerDto.getUser().getUsername());
+
+        userService.checkIsActive(trainerDto.getUser());
+
+        Trainer trainer = conversionService.convert(trainerDto, Trainer.class);
+        Trainer updatedTrainer = trainerRepository.save(Objects.requireNonNull(trainer));
+
+        log.debug("Profile updated for trainer: {}", trainerDto.getUser().getUsername());
+
+        return conversionService.convert(updatedTrainer, TrainerDto.class);
+    }
+
+    @Override
+    public TrainerDto updateTrainerPassword(TrainerDto trainerDto, String newPassword) {
+        log.trace("Updating password for trainer: {}", trainerDto.getUser().getUsername());
+
+        userService.checkIsActive(trainerDto.getUser());
+
+        Trainer trainer = conversionService.convert(trainerDto, Trainer.class);
+        Objects.requireNonNull(trainer).getUser().setPassword(newPassword);
+        Trainer updatedTrainer = trainerRepository.save(trainer);
+
+        log.debug("Password updated for trainer: {}", trainerDto.getUser().getUsername());
+
+        return conversionService.convert(updatedTrainer, TrainerDto.class);
+    }
+
+    @Override
+    public TrainerDto activateTrainer(TrainerDto trainerDto) {
+        log.trace("Activating trainer: {}", trainerDto.getUser().getUsername());
+
+        UserRequestDto userRequestDto = userService.activateUser(trainerDto.getUser());
+        trainerDto.setUser(userRequestDto);
+
+        log.debug("Trainer activated: {}", trainerDto.getUser().getUsername());
+
+        return trainerDto;
+    }
+
+    @Override
+    public TrainerDto deactivateTrainer(TrainerDto trainerDto) {
+        log.trace("Deactivating trainer: {}", trainerDto.getUser().getUsername());
+
+        userService.checkIsActive(trainerDto.getUser());
+
+        Trainer trainer = trainerRepository.findByUserUsername(trainerDto.getUser().getUsername())
+                .orElseThrow(() -> new IllegalArgumentException("Trainer not found"));
+        trainer.getUser().setIsActive(false);
+        Trainer updatedTrainer = trainerRepository.save(trainer);
+
+        log.debug("Trainer deactivated: {}", trainerDto.getUser().getUsername());
+
+        return conversionService.convert(updatedTrainer, TrainerDto.class);
     }
 }

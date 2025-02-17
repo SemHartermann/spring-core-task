@@ -4,7 +4,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Date;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -14,5 +13,5 @@ import java.util.Set;
 public class TraineeDto extends BaseDto {
     Date dateOfBirth;
     String address;
-    UserDto user;
+    UserRequestDto user;
 }

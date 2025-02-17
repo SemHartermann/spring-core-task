@@ -2,14 +2,20 @@ package com.lab.epam.crm.gym.service;
 
 import com.lab.epam.crm.gym.dto.TrainerDto;
 
-import java.util.List;
-
 public interface TrainerService {
-    void create(TrainerDto trainer);
+    TrainerDto createTrainer(TrainerDto trainerDto);
 
-    void update(TrainerDto trainer);
+    TrainerDto getTrainerByUsername(String username);
 
-    TrainerDto getById(Integer id);
+    TrainerDto getTrainerById(Integer id);
 
-    List<TrainerDto> getAll();
+    TrainerDto updateTrainerProfile(TrainerDto trainerDto);
+
+    TrainerDto updateTrainerPassword(TrainerDto trainerDto, String newPassword);
+
+    TrainerDto activateTrainer(TrainerDto trainerDto);
+
+    TrainerDto deactivateTrainer(TrainerDto trainerDto);
+
+    TrainerDto authenticate(String username, String password);
 }

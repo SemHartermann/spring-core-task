@@ -2,7 +2,7 @@ package com.lab.epam.crm.gym.service.impl;
 
 import com.lab.epam.crm.gym.dao.TraineeDao;
 import com.lab.epam.crm.gym.dao.TrainerDao;
-import com.lab.epam.crm.gym.dto.UserDto;
+import com.lab.epam.crm.gym.dto.UserRequestDto;
 import com.lab.epam.crm.gym.entity.Trainee;
 import com.lab.epam.crm.gym.entity.Trainer;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,14 +40,14 @@ public class UserProfileServiceTest {
 
     @Test
     public void testGenerateUsername() {
-        UserDto userDto = new UserDto() {
+        UserRequestDto userRequestDto = new UserRequestDto() {
             {
                 setFirstName("John");
                 setLastName("Doe");
             }
         };
 
-        String username = userProfileService.generateUsername(userDto);
+        String username = userProfileService.generateUsername(userRequestDto);
 
         assertNotNull(username);
         assertFalse(username.isEmpty());

@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserDto extends BaseDto {
+public class UserRequestDto extends BaseDto {
     String firstName;
     String lastName;
     String username;

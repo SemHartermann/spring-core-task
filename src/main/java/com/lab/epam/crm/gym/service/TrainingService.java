@@ -1,13 +1,18 @@
 package com.lab.epam.crm.gym.service;
 
+import com.lab.epam.crm.gym.dto.TrainerDto;
 import com.lab.epam.crm.gym.dto.TrainingDto;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface TrainingService {
-    void create(TrainingDto training);
+    TrainingDto createTraining(TrainingDto trainingDto);
 
-    TrainingDto getById(Integer id);
+    TrainingDto getTrainingById(Integer id);
 
-    List<TrainingDto> getAll();
+    List<TrainingDto> getTraineeTrainings(String username, Date fromDate, Date toDate);
+
+    List<TrainingDto> getTrainerTrainings(String username, Date fromDate, Date toDate);
 }
