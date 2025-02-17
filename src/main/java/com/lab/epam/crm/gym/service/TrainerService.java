@@ -1,21 +1,22 @@
 package com.lab.epam.crm.gym.service;
 
-import com.lab.epam.crm.gym.dto.TrainerDto;
+import com.lab.epam.crm.gym.dto.TrainerRequestDto;
+import com.lab.epam.crm.gym.dto.TrainerResponseDto;
 
 public interface TrainerService {
-    TrainerDto createTrainer(TrainerDto trainerDto);
+    TrainerResponseDto createTrainer(TrainerRequestDto trainerRequestDto);
 
-    TrainerDto getTrainerByUsername(String username);
+    TrainerResponseDto getTrainerByUsername(String username);
 
-    TrainerDto getTrainerById(Integer id);
+    TrainerResponseDto getTrainerById(Integer id);
 
-    TrainerDto updateTrainerProfile(TrainerDto trainerDto);
+    TrainerResponseDto updateTrainerProfile(TrainerRequestDto trainerRequestDto);
 
-    TrainerDto updateTrainerPassword(TrainerDto trainerDto, String newPassword);
+    TrainerResponseDto updateTrainerPassword(TrainerRequestDto trainerRequestDto, String newPassword);
 
-    TrainerDto activateTrainer(TrainerDto trainerDto);
+    TrainerResponseDto activateTrainer(TrainerRequestDto trainerRequestDto);
 
-    TrainerDto deactivateTrainer(TrainerDto trainerDto);
+    TrainerResponseDto deactivateTrainer(TrainerRequestDto trainerRequestDto);
 
-    TrainerDto authenticate(String username, String password);
+    TrainerResponseDto authenticate(String username, String password);
 }

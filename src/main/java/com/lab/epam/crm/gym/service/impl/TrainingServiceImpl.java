@@ -1,21 +1,15 @@
 package com.lab.epam.crm.gym.service.impl;
 
-import com.lab.epam.crm.gym.dto.TrainerDto;
+import com.lab.epam.crm.gym.dto.TraineeResponseDto;
 import com.lab.epam.crm.gym.dto.TrainingDto;
+import com.lab.epam.crm.gym.dto.UserResponseDto;
 import com.lab.epam.crm.gym.entity.Training;
-import com.lab.epam.crm.gym.entity.Trainee;
-import com.lab.epam.crm.gym.entity.Trainer;
-import com.lab.epam.crm.gym.entity.TrainingType;
 import com.lab.epam.crm.gym.repository.TrainingRepository;
-import com.lab.epam.crm.gym.repository.TrainingTypeRepository;
-import com.lab.epam.crm.gym.repository.TraineeRepository;
-import com.lab.epam.crm.gym.repository.TrainerRepository;
 import com.lab.epam.crm.gym.service.TrainingService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +25,6 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class TrainingServiceImpl implements TrainingService {
     TrainingRepository trainingRepository;
-    
     ConversionService conversionService;
 
     @Transactional

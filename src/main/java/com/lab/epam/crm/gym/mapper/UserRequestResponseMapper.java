@@ -1,18 +1,18 @@
 package com.lab.epam.crm.gym.mapper;
 
 import com.lab.epam.crm.gym.dto.UserRequestDto;
-import com.lab.epam.crm.gym.entity.User;
+import com.lab.epam.crm.gym.dto.UserResponseDto;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.springframework.core.convert.converter.Converter;
 import org.mapstruct.extensions.spring.DelegatingConverter;
+import org.springframework.core.convert.converter.Converter;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper extends Converter<User, UserRequestDto> {
+public interface UserRequestResponseMapper extends Converter<UserRequestDto, UserResponseDto> {
     @Override
-    UserRequestDto convert(User user);
+    UserResponseDto convert(UserRequestDto userRequestDto);
 
     @InheritInverseConfiguration
     @DelegatingConverter
-    User invertConvert(UserRequestDto userRequestDto);
+    UserRequestDto invertConvert(UserResponseDto userResponseDto);
 }

@@ -10,11 +10,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TrainingDto extends BaseDto {
-    TraineeResponseDto trainee;
-    TrainerResponseDto trainer;
-    String trainingName;
-    TrainingTypeDto trainingType;
-    Date trainingDate;
-    Integer trainingDuration;
+public class TraineeResponseDto extends BaseDto {
+    Date dateOfBirth;
+    String address;
+    UserResponseDto user;
 }

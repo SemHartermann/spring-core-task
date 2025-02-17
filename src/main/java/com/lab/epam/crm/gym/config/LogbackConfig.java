@@ -93,7 +93,7 @@ public class LogbackConfig {
 
     @Bean
     public Logger storageLogger(LoggerContext ctx, ConsoleAppender<ILoggingEvent> consoleAppender, RollingFileAppender<ILoggingEvent> fileAppender) {
-        Logger storageLogger = ctx.getLogger("com.lab.epam.crm.gym.dao.storage");
+        Logger storageLogger = ctx.getLogger("com.lab.epam.crm.gym");
         storageLogger.setLevel(Level.toLevel(logLevel, Level.DEBUG));
         storageLogger.setAdditive(false);
         storageLogger.addAppender(consoleAppender);
@@ -103,7 +103,7 @@ public class LogbackConfig {
 
     @Bean
     public Logger daoLogger(LoggerContext ctx, ConsoleAppender<ILoggingEvent> consoleAppender, RollingFileAppender<ILoggingEvent> fileAppender) {
-        Logger daoLogger = ctx.getLogger("com.lab.epam.crm.gym.dao.impl");
+        Logger daoLogger = ctx.getLogger("com.lab.epam.crm.gym");
         daoLogger.setLevel(Level.toLevel(logLevel, Level.DEBUG));
         daoLogger.setAdditive(false);
         daoLogger.addAppender(consoleAppender);

@@ -1,21 +1,22 @@
 package com.lab.epam.crm.gym.service;
 
 import com.lab.epam.crm.gym.dto.UserRequestDto;
+import com.lab.epam.crm.gym.dto.UserResponseDto;
 
 public interface UserService {
-    UserRequestDto createUser(UserRequestDto userRequestDto);
+    UserResponseDto createUser(UserRequestDto userRequestDto);
 
-    UserRequestDto getUserByUsername(String username);
+    UserResponseDto getUserByUsername(String username);
 
-    UserRequestDto getUserById(Integer id);
+    UserResponseDto getUserById(Integer id);
 
-    UserRequestDto authenticate(String username, String password);
+    UserResponseDto authenticate(String username, String password);
 
     void checkIsActive(UserRequestDto userRequestDto);
 
-    UserRequestDto updateUserPassword(UserRequestDto userRequestDto, String newPassword);
+    UserResponseDto updateUserPassword(UserRequestDto userRequestDto, String newPassword);
 
-    UserRequestDto activateUser(UserRequestDto userRequestDto);
+    UserResponseDto activateUser(UserRequestDto userRequestDto);
 
-    UserRequestDto deactivateUser(UserRequestDto userRequestDto);
+    UserResponseDto deactivateUser(UserRequestDto userRequestDto);
 }

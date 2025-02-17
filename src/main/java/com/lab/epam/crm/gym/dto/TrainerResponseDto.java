@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TrainerDto extends BaseDto {
+public class TrainerResponseDto extends BaseDto {
     TrainingTypeDto specialization;
-    UserRequestDto user;
+    UserResponseDto user;
 }

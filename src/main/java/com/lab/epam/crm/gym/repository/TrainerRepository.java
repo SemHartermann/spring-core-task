@@ -17,6 +17,6 @@ public interface TrainerRepository extends JpaRepository<Trainer, Integer> {
 
     Integer deleteByUserUsername(String username);
 
-    @Query("SELECT tr FROM Trainer tr JOIN tr.trainees trn WHERE trn.user.username != :traineeUsername")
+    @Query("SELECT tr FROM Trainer tr WHERE tr.id NOT IN (SELECT t.id FROM Trainer t JOIN t.trainees trn WHERE trn.user.username = :traineeUsername)")
     List<Trainer> findUnassignedTrainersByTraineeUsername(@Param("traineeUsername") String traineeUsername);
 }

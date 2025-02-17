@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TraineeDto extends BaseDto {
+public class TraineeRequestDto extends BaseDto {
     Date dateOfBirth;
     String address;
     UserRequestDto user;

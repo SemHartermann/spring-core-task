@@ -1,11 +1,9 @@
 package com.lab.epam.crm.gym.service;
 
-import com.lab.epam.crm.gym.dto.TrainerDto;
 import com.lab.epam.crm.gym.dto.TrainingDto;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 public interface TrainingService {
     TrainingDto createTraining(TrainingDto trainingDto);

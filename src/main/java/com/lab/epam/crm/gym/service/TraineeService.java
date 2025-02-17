@@ -1,34 +1,32 @@
 package com.lab.epam.crm.gym.service;
 
-import com.lab.epam.crm.gym.dto.TraineeDto;
-import com.lab.epam.crm.gym.dto.TrainingDto;
-import com.lab.epam.crm.gym.dto.TrainerDto;
+import com.lab.epam.crm.gym.dto.*;
 
 import java.util.Date;
 import java.util.List;
 
 public interface TraineeService {
-    TraineeDto createTrainee(TraineeDto traineeDto);
+    TraineeResponseDto createTrainee(TraineeRequestDto traineeRequestDto);
 
-    TraineeDto getTraineeByUsername(String username);
+    TraineeResponseDto getTraineeByUsername(String username);
 
-    TraineeDto getTraineeById(Integer id);
+    TraineeResponseDto getTraineeById(Integer id);
 
-    TraineeDto updateTraineeProfile(TraineeDto traineeDto);
+    TraineeResponseDto updateTraineeProfile(TraineeRequestDto traineeRequestDto);
 
-    TraineeDto updateTraineePassword(TraineeDto traineeDto, String newPassword);
+    TraineeResponseDto updateTraineePassword(TraineeRequestDto traineeRequestDto, String newPassword);
 
-    TraineeDto activateTrainee(TraineeDto traineeDto);
+    TraineeResponseDto activateTrainee(TraineeRequestDto traineeRequestDto);
 
-    TraineeDto deactivateTrainee(TraineeDto traineeDto);
+    TraineeResponseDto deactivateTrainee(TraineeRequestDto traineeRequestDto);
 
     void deleteTraineeProfileByUsername(String username);
 
     List<TrainingDto> getTraineeTrainings(String username, Date fromDate, Date toDate, String trainerName, String trainingType);
 
-    List<TrainerDto> getUnassignedTrainers(String username);
+    List<TrainerResponseDto> getUnassignedTrainers(String username);
 
-    TraineeDto updateTraineeTrainersList(Integer traineeId, List<Integer> trainerIds);
+    TraineeResponseDto updateTraineeTrainersList(Integer traineeId, List<Integer> trainerIds);
 
-    TraineeDto authenticate(String username, String password);
+    TraineeResponseDto authenticate(String username, String password);
 }

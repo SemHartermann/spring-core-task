@@ -1,9 +1,12 @@
 package com.lab.epam.crm.gym.service.impl;
 
 import com.lab.epam.crm.gym.dto.UserRequestDto;
+import com.lab.epam.crm.gym.dto.UserResponseDto;
 import com.lab.epam.crm.gym.entity.User;
 import com.lab.epam.crm.gym.repository.UserRepository;
 import com.lab.epam.crm.gym.service.UserService;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -26,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserRequestDto createUser(UserRequestDto userRequestDto) {
+    public UserResponseDto createUser(UserRequestDto userRequestDto) {
         log.trace("Creating user with first name: {} and last name: {}", userRequestDto.getFirstName(), userRequestDto.getLastName());
 
         String username = generateUsername(userRequestDto);
@@ -43,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
         log.debug("User created with username: {}", username);
 
-        return conversionService.convert(savedUser, UserRequestDto.class);
+        return conversionService.convert(savedUser, UserResponseDto.class);
     }
 
     private String generateUsername(UserRequestDto userRequestDto) {
@@ -69,27 +72,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserRequestDto getUserByUsername(String username) {
+    public UserResponseDto getUserByUsername(String username) {
         log.trace("Fetching user by username: {}", username);
 
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        return conversionService.convert(user, UserRequestDto.class);
+        return conversionService.convert(user, UserResponseDto.class);
     }
 
     @Override
-    public UserRequestDto getUserById(Integer id) {
+    public UserResponseDto getUserById(Integer id) {
         log.trace("Fetching user by id: {}", id);
 
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        return conversionService.convert(user, UserRequestDto.class);
+        return conversionService.convert(user, UserResponseDto.class);
     }
 
     @Override
-    public UserRequestDto authenticate(String username, String password) {
+    public UserResponseDto authenticate(String username, String password) {
         log.trace("Authenticating user with username: {}", username);
 
         Optional<User> user = userRepository.findByUsernameAndPassword(username, password);
@@ -101,7 +104,7 @@ public class UserServiceImpl implements UserService {
 
             log.debug("User authenticated and activated with username: {}", username);
 
-            return conversionService.convert(u, UserRequestDto.class);
+            return conversionService.convert(u, UserResponseDto.class);
         }
 
         log.warn("Authentication failed for username: {}", username);
@@ -120,7 +123,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserRequestDto updateUserPassword(UserRequestDto userRequestDto, String newPassword) {
+    public UserResponseDto updateUserPassword(UserRequestDto userRequestDto, String newPassword) {
         checkIsActive(userRequestDto);
 
         log.trace("Updating password for user: {}", userRequestDto.getUsername());
@@ -131,11 +134,11 @@ public class UserServiceImpl implements UserService {
 
         log.debug("Password updated for user: {}", user.getUsername());
 
-        return conversionService.convert(updatedUser, UserRequestDto.class);
+        return conversionService.convert(updatedUser, UserResponseDto.class);
     }
 
     @Override
-    public UserRequestDto activateUser(UserRequestDto userRequestDto) {
+    public UserResponseDto activateUser(UserRequestDto userRequestDto) {
         log.trace("Activating user: {}", userRequestDto.getUsername());
 
         User user = userRepository.findByUsername(userRequestDto.getUsername())
@@ -146,11 +149,11 @@ public class UserServiceImpl implements UserService {
 
         log.debug("User activated: {}", userRequestDto.getUsername());
 
-        return conversionService.convert(updatedUser, UserRequestDto.class);
+        return conversionService.convert(updatedUser, UserResponseDto.class);
     }
 
     @Override
-    public UserRequestDto deactivateUser(UserRequestDto userRequestDto) {
+    public UserResponseDto deactivateUser(UserRequestDto userRequestDto) {
         log.trace("Deactivating user: {}", userRequestDto.getUsername());
 
         User user = userRepository.findByUsername(userRequestDto.getUsername())
@@ -160,6 +163,21 @@ public class UserServiceImpl implements UserService {
 
         log.debug("User deactivated: {}", userRequestDto.getUsername());
 
-        return conversionService.convert(updatedUser, UserRequestDto.class);
+        return conversionService.convert(updatedUser, UserResponseDto.class);
+    }
+
+    private void deactivateAllUsers() {
+        log.trace("Deactivating all users");
+
+        List<User> users = userRepository.findAll();
+        users.forEach(user -> user.setIsActive(false));
+        userRepository.saveAll(users);
+
+        log.debug("All users deactivated");
+    }
+
+    @PreDestroy
+    public void onDestroy() {
+        deactivateAllUsers();
     }
 }

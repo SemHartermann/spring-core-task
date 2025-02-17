@@ -1,7 +1,9 @@
 package com.lab.epam.crm.gym.service.impl;
 
-import com.lab.epam.crm.gym.dto.TrainerDto;
+import com.lab.epam.crm.gym.dto.TrainerRequestDto;
+import com.lab.epam.crm.gym.dto.TrainerResponseDto;
 import com.lab.epam.crm.gym.dto.UserRequestDto;
+import com.lab.epam.crm.gym.dto.UserResponseDto;
 import com.lab.epam.crm.gym.entity.Trainer;
 import com.lab.epam.crm.gym.repository.TrainerRepository;
 import com.lab.epam.crm.gym.service.TrainerService;
@@ -27,23 +29,24 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Transactional
     @Override
-    public TrainerDto createTrainer(TrainerDto trainerDto) {
-        log.trace("Creating trainer with first name: {} and last name: {}", trainerDto.getUser().getFirstName(), trainerDto.getUser().getLastName());
+    public TrainerResponseDto createTrainer(TrainerRequestDto trainerRequestDto) {
+        log.trace("Creating trainer with first name: {} and last name: {}",
+                trainerRequestDto.getUser().getFirstName(), trainerRequestDto.getUser().getLastName());
 
-        UserRequestDto userRequestDto = userService.createUser(trainerDto.getUser());
+        UserResponseDto userResponseDto = userService.createUser(trainerRequestDto.getUser());
 
-        trainerDto.setUser(userRequestDto);
+        trainerRequestDto.setUser(conversionService.convert(userResponseDto, UserRequestDto.class));
 
-        Trainer trainer = conversionService.convert(trainerDto, Trainer.class);
+        Trainer trainer = conversionService.convert(trainerRequestDto, Trainer.class);
         trainer = trainerRepository.save(Objects.requireNonNull(trainer));
 
-        log.debug("Trainer created with user: {}", userRequestDto.getUsername());
+        log.debug("Trainer created with user: {}", userResponseDto.getUsername());
 
-        return conversionService.convert(trainer, TrainerDto.class);
+        return conversionService.convert(trainer, TrainerResponseDto.class);
     }
 
     @Override
-    public TrainerDto getTrainerById(Integer id) {
+    public TrainerResponseDto getTrainerById(Integer id) {
         log.trace("Fetching trainer by id: {}", id);
 
         Trainer trainer = trainerRepository.findById(id)
@@ -51,11 +54,11 @@ public class TrainerServiceImpl implements TrainerService {
 
         log.debug("Trainer was found by id: {}", id);
 
-        return conversionService.convert(trainer, TrainerDto.class);
+        return conversionService.convert(trainer, TrainerResponseDto.class);
     }
 
     @Override
-    public TrainerDto getTrainerByUsername(String username) {
+    public TrainerResponseDto getTrainerByUsername(String username) {
         log.trace("Fetching trainer by username: {}", username);
 
         Trainer trainer = trainerRepository.findByUserUsername(username)
@@ -63,74 +66,78 @@ public class TrainerServiceImpl implements TrainerService {
 
         log.debug("Trainer was found by username: {}", username);
 
-        return conversionService.convert(trainer, TrainerDto.class);
+        return conversionService.convert(trainer, TrainerResponseDto.class);
     }
 
     @Override
-    public TrainerDto authenticate(String username, String password) {
+    public TrainerResponseDto authenticate(String username, String password) {
         log.trace("Authenticating trainer with username: {}", username);
 
         userService.authenticate(username, password);
 
         Trainer trainer = trainerRepository.findByUserUsername(username).get();
 
-        return conversionService.convert(trainer, TrainerDto.class);
+        return conversionService.convert(trainer, TrainerResponseDto.class);
     }
 
     @Override
-    public TrainerDto updateTrainerProfile(TrainerDto trainerDto) {
-        log.trace("Updating profile for trainer: {}", trainerDto.getUser().getUsername());
+    public TrainerResponseDto updateTrainerProfile(TrainerRequestDto trainerRequestDto) {
+        log.trace("Updating profile for trainer: {}", trainerRequestDto.getUser().getUsername());
 
-        userService.checkIsActive(trainerDto.getUser());
+        userService.checkIsActive(trainerRequestDto.getUser());
 
-        Trainer trainer = conversionService.convert(trainerDto, Trainer.class);
+        Trainer trainer = conversionService.convert(trainerRequestDto, Trainer.class);
         Trainer updatedTrainer = trainerRepository.save(Objects.requireNonNull(trainer));
 
-        log.debug("Profile updated for trainer: {}", trainerDto.getUser().getUsername());
+        log.debug("Profile updated for trainer: {}", trainerRequestDto.getUser().getUsername());
 
-        return conversionService.convert(updatedTrainer, TrainerDto.class);
+        return conversionService.convert(updatedTrainer, TrainerResponseDto.class);
     }
 
     @Override
-    public TrainerDto updateTrainerPassword(TrainerDto trainerDto, String newPassword) {
-        log.trace("Updating password for trainer: {}", trainerDto.getUser().getUsername());
+    public TrainerResponseDto updateTrainerPassword(TrainerRequestDto trainerRequestDto, String newPassword) {
+        log.trace("Updating password for trainer: {}", trainerRequestDto.getUser().getUsername());
 
-        userService.checkIsActive(trainerDto.getUser());
+        userService.checkIsActive(trainerRequestDto.getUser());
 
-        Trainer trainer = conversionService.convert(trainerDto, Trainer.class);
+        Trainer trainer = conversionService.convert(trainerRequestDto, Trainer.class);
         Objects.requireNonNull(trainer).getUser().setPassword(newPassword);
         Trainer updatedTrainer = trainerRepository.save(trainer);
 
-        log.debug("Password updated for trainer: {}", trainerDto.getUser().getUsername());
+        log.debug("Password updated for trainer: {}", trainerRequestDto.getUser().getUsername());
 
-        return conversionService.convert(updatedTrainer, TrainerDto.class);
+        return conversionService.convert(updatedTrainer, TrainerResponseDto.class);
     }
 
     @Override
-    public TrainerDto activateTrainer(TrainerDto trainerDto) {
-        log.trace("Activating trainer: {}", trainerDto.getUser().getUsername());
+    public TrainerResponseDto activateTrainer(TrainerRequestDto trainerRequestDto) {
+        log.trace("Activating trainer: {}", trainerRequestDto.getUser().getUsername());
 
-        UserRequestDto userRequestDto = userService.activateUser(trainerDto.getUser());
-        trainerDto.setUser(userRequestDto);
+        UserResponseDto userResponseDto = userService.activateUser(trainerRequestDto.getUser());
 
-        log.debug("Trainer activated: {}", trainerDto.getUser().getUsername());
+        TrainerResponseDto trainerResponseDto = conversionService.convert(trainerRequestDto,
+                TrainerResponseDto.class);
+        trainerResponseDto.setUser(userResponseDto);
 
-        return trainerDto;
+        log.debug("Trainer activated: {}", trainerRequestDto.getUser().getUsername());
+
+        return trainerResponseDto;
     }
 
     @Override
-    public TrainerDto deactivateTrainer(TrainerDto trainerDto) {
-        log.trace("Deactivating trainer: {}", trainerDto.getUser().getUsername());
+    public TrainerResponseDto deactivateTrainer(TrainerRequestDto trainerRequestDto) {
+        log.trace("Deactivating trainer: {}", trainerRequestDto.getUser().getUsername());
 
-        userService.checkIsActive(trainerDto.getUser());
+        userService.checkIsActive(trainerRequestDto.getUser());
 
-        Trainer trainer = trainerRepository.findByUserUsername(trainerDto.getUser().getUsername())
-                .orElseThrow(() -> new IllegalArgumentException("Trainer not found"));
-        trainer.getUser().setIsActive(false);
-        Trainer updatedTrainer = trainerRepository.save(trainer);
+        UserResponseDto userResponseDto = userService.deactivateUser(trainerRequestDto.getUser());
 
-        log.debug("Trainer deactivated: {}", trainerDto.getUser().getUsername());
+        TrainerResponseDto trainerResponseDto = conversionService.convert(trainerRequestDto,
+                TrainerResponseDto.class);
+        trainerResponseDto.setUser(userResponseDto);
 
-        return conversionService.convert(updatedTrainer, TrainerDto.class);
+        log.debug("Trainer deactivated: {}", trainerRequestDto.getUser().getUsername());
+
+        return trainerResponseDto;
     }
 }
