@@ -1,8 +1,6 @@
 package com.lab.epam.crm.gym.service.impl;
 
-import com.lab.epam.crm.gym.dto.TraineeResponseDto;
 import com.lab.epam.crm.gym.dto.TrainingDto;
-import com.lab.epam.crm.gym.dto.UserResponseDto;
 import com.lab.epam.crm.gym.entity.Training;
 import com.lab.epam.crm.gym.repository.TrainingRepository;
 import com.lab.epam.crm.gym.service.TrainingService;

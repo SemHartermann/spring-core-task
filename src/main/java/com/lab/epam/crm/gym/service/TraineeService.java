@@ -1,6 +1,9 @@
 package com.lab.epam.crm.gym.service;
 
-import com.lab.epam.crm.gym.dto.*;
+import com.lab.epam.crm.gym.dto.TraineeRequestDto;
+import com.lab.epam.crm.gym.dto.TraineeResponseDto;
+import com.lab.epam.crm.gym.dto.TrainerResponseDto;
+import com.lab.epam.crm.gym.dto.TrainingDto;
 
 import java.util.Date;
 import java.util.List;

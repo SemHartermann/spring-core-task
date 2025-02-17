@@ -1,7 +1,6 @@
 package com.lab.epam.crm.gym.repository;
 
 import com.lab.epam.crm.gym.entity.Trainee;
-import com.lab.epam.crm.gym.entity.Trainer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

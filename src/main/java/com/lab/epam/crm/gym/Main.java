@@ -7,7 +7,6 @@ import com.lab.epam.crm.gym.dto.*;
 import com.lab.epam.crm.gym.service.TraineeService;
 import com.lab.epam.crm.gym.service.TrainerService;
 import com.lab.epam.crm.gym.service.TrainingService;
-import com.lab.epam.crm.gym.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Arrays;

@@ -5,7 +5,6 @@ import com.lab.epam.crm.gym.dto.UserResponseDto;
 import com.lab.epam.crm.gym.entity.User;
 import com.lab.epam.crm.gym.repository.UserRepository;
 import com.lab.epam.crm.gym.service.UserService;
-import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
